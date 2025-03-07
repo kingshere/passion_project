@@ -1,7 +1,9 @@
-# Football Analysis Project
+
 
 ## Introduction
-The goal of this project is to detect and track players, referees, and footballs in a video using YOLO, one of the best AI object detection models available. We will also train the model to improve its performance. Additionally, we will assign players to teams based on the colors of their t-shirts using Kmeans for pixel segmentation and clustering. With this information, we can measure a team's ball acquisition percentage in a match. We will also use optical flow to measure camera movement between frames, enabling us to accurately measure a player's movement. Furthermore, we will implement perspective transformation to represent the scene's depth and perspective, allowing us to measure a player's movement in meters rather than pixels. Finally, we will calculate a player's speed and the distance covered. This project covers various concepts and addresses real-world problems, making it suitable for both beginners and experienced machine learning engineers.
+This project aims to design a system capable of detecting and tracking players, referees, and footballs in video footage using the YOLO (You Only Look Once) object detection framework. To enhance accuracy, the model will undergo training to optimize its performance. Additionally, the system will categorize players into teams by analyzing the colors of their jerseys through K-means clustering, a pixel-based segmentation technique. This classification will enable the calculation of a team’s ball possession percentage during a match.
+
+To measure player movement accurately, optical flow analysis will be employed to account for camera motion between frames. Perspective transformation will then be applied to adjust for depth and scene perspective, allowing movement metrics (e.g., speed and distance covered) to be converted from pixel-based measurements to real-world units (meters). The project integrates computer vision and machine learning concepts, addressing practical challenges such as object tracking, color-based segmentation, and spatial analysis. It is designed to be accessible for learners new to machine learning while offering complexity and depth for more experienced engineers.
 
 
 
@@ -14,8 +16,6 @@ The following modules are used in this project:
 - Speed and distance calculation per player
 
 
-## Sample video
--  [Sample input video](https://drive.google.com/file/d/1t6agoqggZKx6thamUuPAIdN_1zR9v9S_/view?usp=sharing)
 
 ## Requirements
 To run this project, you need to have the following requirements installed:
