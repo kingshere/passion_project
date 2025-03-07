@@ -29,8 +29,7 @@ def main():
                                                                                 stub_path='stubs/camera_movement_stub.pkl')
     camera_movement_estimator.add_adjust_positions_to_tracks(tracks,camera_movement_per_frame)
 
-
-    # View Trasnformer
+    # View Transformer
     view_transformer = ViewTransformer()
     view_transformer.add_transformed_position_to_tracks(tracks)
 
@@ -43,42 +42,59 @@ def main():
 
     # Assign Player Teams
     team_assigner = TeamAssigner()
-    team_assigner.assign_team_color(video_frames[0], 
-                                    tracks['players'][0])
-    
-    for frame_num, player_track in enumerate(tracks['players']):
-        for player_id, track in player_track.items():
-            team = team_assigner.get_player_team(video_frames[frame_num],   
-                                                 track['bbox'],
-                                                 player_id)
-            tracks['players'][frame_num][player_id]['team'] = team 
-            tracks['players'][frame_num][player_id]['team_color'] = team_assigner.team_colors[team]
+    try:
+        team_assigner.assign_team_color(video_frames[0], 
+                                      tracks['players'][0])
+        
+        for frame_num, player_track in enumerate(tracks['players']):
+            for player_id, track in player_track.items():
+                team = team_assigner.get_player_team(video_frames[frame_num],   
+                                                   track['bbox'],
+                                                   player_id)
+                tracks['players'][frame_num][player_id]['team'] = team 
+                tracks['players'][frame_num][player_id]['team_color'] = team_assigner.team_colors[team]
+    except ValueError as e:
+        print(f"Warning: Error during team assignment - {str(e)}")
+        # Set default team values with alternating teams
+        for frame_num, player_track in enumerate(tracks['players']):
+            for i, (player_id, track) in enumerate(player_track.items()):
+                team = 'team1' if i % 2 == 0 else 'team2'
+                tracks['players'][frame_num][player_id]['team'] = team
+                tracks['players'][frame_num][player_id]['team_color'] = (255, 0, 0) if team == 'team1' else (0, 0, 255)
 
+    # Assign Ball Acquisition
+    player_assigner = PlayerBallAssigner()
+    team_ball_control = []
+    team_ball_control.append(1)  # Initialize with team1
     
-    # Assign Ball Aquisition
-    player_assigner =PlayerBallAssigner()
-    team_ball_control= []
+    # Set has_ball to False for all players initially
+    for frame_num, player_track in enumerate(tracks['players']):
+        for player_id in player_track:
+            tracks['players'][frame_num][player_id]['has_ball'] = False
+    
+    # Assign ball possession
     for frame_num, player_track in enumerate(tracks['players']):
         ball_bbox = tracks['ball'][frame_num][1]['bbox']
         assigned_player = player_assigner.assign_ball_to_player(player_track, ball_bbox)
 
         if assigned_player != -1:
             tracks['players'][frame_num][assigned_player]['has_ball'] = True
-            team_ball_control.append(tracks['players'][frame_num][assigned_player]['team'])
+            team_value = 1 if tracks['players'][frame_num][assigned_player]['team'] == 'team1' else 2
+            team_ball_control.append(team_value)
         else:
             team_ball_control.append(team_ball_control[-1])
-    team_ball_control= np.array(team_ball_control)
-
+    
+    team_ball_control = np.array(team_ball_control)
 
     # Draw output 
     ## Draw object Tracks
-    output_video_frames = tracker.draw_annotations(video_frames, tracks,team_ball_control)
+    output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control)
 
     ## Draw Camera movement
-    output_video_frames = camera_movement_estimator.draw_camera_movement(output_video_frames,camera_movement_per_frame)
+    output_video_frames = camera_movement_estimator.draw_camera_movement(output_video_frames, camera_movement_per_frame)
 
     ## Draw Speed and Distance
-    speed_and_distance_estimator.draw_speed_and_distance(output_video_frames,tracks)
+    speed_and_distance_estimator.draw_speed_and_distance(output_video_frames, tracks)
 
     # Save video
     save_video(output_video_frames, 'output_videos/output_video.avi')
