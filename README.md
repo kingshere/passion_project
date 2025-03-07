@@ -18,9 +18,10 @@ The following modules are used in this project:
 ## OUTPUT 
 https://github.com/barnii77/footy-analytics/assets/output_video.mp4
 
-[Watch Demo Video](https://drive.google.com/file/d/11ZPV1yx0iuBbvEYyaIxKs9nUBrxXk4Kb/view?usp=drive_link)
+[Watch Demo Video 1](https://drive.google.com/file/d/11ZPV1yx0iuBbvEYyaIxKs9nUBrxXk4Kb/view?usp=drive_link)
+[Watch Demo Video 2](https://drive.google.com/file/d/1JWqvixvh3ksXC2AltVYCXCTPqrRf4u2t/view?usp=drive_link)
 
-The output video demonstrates:
+The output videos demonstrate:
 - Player detection and tracking
 - Team classification
 - Ball possession tracking
