@@ -16,7 +16,16 @@ The following modules are used in this project:
 - Speed and distance calculation per player
 
 ## OUTPUT 
-![screenshot](https://drive.google.com/file/d/11ZPV1yx0iuBbvEYyaIxKs9nUBrxXk4Kb/view?usp=drive_link)
+https://github.com/barnii77/footy-analytics/assets/output_video.mp4
+
+[Watch Demo Video](https://drive.google.com/file/d/11ZPV1yx0iuBbvEYyaIxKs9nUBrxXk4Kb/view?usp=drive_link)
+
+The output video demonstrates:
+- Player detection and tracking
+- Team classification
+- Ball possession tracking
+- Speed and distance measurements
+- Camera movement compensation
 ## Requirements
 To run this project, you need to have the following requirements installed:
 - Python 3.x
