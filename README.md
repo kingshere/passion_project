@@ -15,8 +15,8 @@ The following modules are used in this project:
 - Perspective Transformation: Represent scene depth and perspective
 - Speed and distance calculation per player
 
-
-
+## OUTPUT 
+![screenshot](https://i.ibb.co/B5Cv37m2/screenshot.png)
 ## Requirements
 To run this project, you need to have the following requirements installed:
 - Python 3.x
