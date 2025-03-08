@@ -1,5 +1,4 @@
-
-
+## FOOTY ANALYTICS
 ## Introduction
 This project aims to design a system capable of detecting and tracking players, referees, and footballs in video footage using the YOLO (You Only Look Once) object detection framework. To enhance accuracy, the model will undergo training to optimize its performance. Additionally, the system will categorize players into teams by analyzing the colors of their jerseys through K-means clustering, a pixel-based segmentation technique. This classification will enable the calculation of a team’s ball possession percentage during a match.
 
@@ -7,7 +6,7 @@ To measure player movement accurately, optical flow analysis will be employed to
 
 
 
-## Modules Used
+
 The following modules are used in this project:
 - YOLO: AI object detection model
 - Kmeans: Pixel segmentation and clustering to detect t-shirt color
